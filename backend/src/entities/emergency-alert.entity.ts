@@ -1,4 +1,4 @@
-import {
+﻿import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -30,7 +30,7 @@ export class EmergencyAlert {
   addressDescription: string;
 
   @Column({
-    type: 'enum',
+    type: 'simple-enum',
     enum: ['ACTIVE', 'RESOLVED', 'FALSE_ALARM'],
     default: 'ACTIVE',
   })

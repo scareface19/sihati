@@ -1,4 +1,4 @@
-import {
+﻿import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -35,12 +35,12 @@ export class Patient {
   @Column({ name: 'date_of_birth', type: 'date', nullable: true })
   dateOfBirth: string;
 
-  @Column({ type: 'enum', enum: ['M', 'F'], nullable: true })
+  @Column({ type: 'simple-enum', enum: ['M', 'F'], nullable: true })
   gender: string;
 
   @Column({
     name: 'blood_group',
-    type: 'enum',
+    type: 'simple-enum',
     enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
     nullable: true,
   })

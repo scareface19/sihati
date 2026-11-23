@@ -1,4 +1,4 @@
-import {
+﻿import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -40,7 +40,7 @@ export class Appointment {
   appointmentDate: Date;
 
   @Column({
-    type: 'enum',
+    type: 'simple-enum',
     enum: AppointmentStatus,
     default: AppointmentStatus.PENDING,
   })

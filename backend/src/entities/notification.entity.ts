@@ -1,4 +1,4 @@
-import {
+﻿import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -44,7 +44,7 @@ export class NotificationEntity {
   @Column({ default: false })
   isRead: boolean;
 
-  @Column({ type: 'json', nullable: true })
+  @Column({ type: 'simple-json', nullable: true })
   metadata: any;
 
   @CreateDateColumn()

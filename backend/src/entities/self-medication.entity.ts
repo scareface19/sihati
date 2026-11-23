@@ -1,4 +1,4 @@
-import {
+﻿import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -34,7 +34,7 @@ export class SelfMedication {
 
   @Column({
     name: 'product_type',
-    type: 'enum',
+    type: 'simple-enum',
     enum: ProductType,
     default: ProductType.OTC,
   })

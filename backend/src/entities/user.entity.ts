@@ -1,4 +1,4 @@
-import {
+﻿import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -29,7 +29,7 @@ export class User {
   passwordHash: string;
 
   @Column({
-    type: 'enum',
+    type: 'simple-enum',
     enum: UserRole,
     default: UserRole.PATIENT,
   })

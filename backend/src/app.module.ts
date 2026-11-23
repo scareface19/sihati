@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import * as fs from 'fs';
+import * as path from 'path';
 import {
   User,
   Patient,
@@ -44,47 +46,81 @@ import { SeedModule } from './modules/seed/seed.module';
       isGlobal: true,
       envFilePath: '.env',
     }),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      ...(process.env.DATABASE_URL
-        ? { url: process.env.DATABASE_URL }
-        : {
-            host: process.env.DB_HOST || 'localhost',
-            port: parseInt(process.env.DB_PORT, 10) || 3306,
-            username: process.env.DB_USERNAME || 'root',
-            password: process.env.DB_PASSWORD || '',
-            database: process.env.DB_NAME || 'sihati_db',
-          }),
-      ssl:
-        process.env.DB_SSL === 'true' ||
-        (process.env.DATABASE_URL &&
-          !process.env.DATABASE_URL.includes('localhost') &&
-          !process.env.DATABASE_URL.includes('127.0.0.1'))
-          ? { rejectUnauthorized: false }
-          : false,
-      entities: [
-        User,
-        Patient,
-        Doctor,
-        Medication,
-        Appointment,
-        MedicalRecord,
-        Prescription,
-        PrescriptionItem,
-        EmergencyContact,
-        EmergencyAlert,
-        SelfMedication,
-        AccessConsent,
-        MedicalDocument,
-        MedicalExamination,
-        PharmacyProfile,
-        PharmacyStock,
-        PharmacyOrder,
-        NotificationEntity,
-        DrugTraceability,
-      ],
-      synchronize: true, // TypeORM synchronise automatiquement les tables MySQL
-      logging: false,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        const rawDbType = (config.get<string>('DB_TYPE') || '').toLowerCase().trim();
+        const hasMysqlConfig =
+          (config.get<string>('DB_HOST') && config.get<string>('DB_HOST') !== 'localhost') ||
+          config.get<string>('DATABASE_URL');
+
+        // Mode MySQL si explicitement demandé (DB_TYPE=mysql) ou si DATABASE_URL est fourni
+        const useMysql = rawDbType === 'mysql' || (rawDbType !== 'sqlite' && hasMysqlConfig);
+
+        const entities = [
+          User,
+          Patient,
+          Doctor,
+          Medication,
+          Appointment,
+          MedicalRecord,
+          Prescription,
+          PrescriptionItem,
+          EmergencyContact,
+          EmergencyAlert,
+          SelfMedication,
+          AccessConsent,
+          MedicalDocument,
+          MedicalExamination,
+          PharmacyProfile,
+          PharmacyStock,
+          PharmacyOrder,
+          NotificationEntity,
+          DrugTraceability,
+        ];
+
+        if (useMysql) {
+          const dbUrl = config.get<string>('DATABASE_URL');
+          const isSsl =
+            config.get<string>('DB_SSL') === 'true' ||
+            (dbUrl && !dbUrl.includes('localhost') && !dbUrl.includes('127.0.0.1'));
+
+          return {
+            type: 'mysql',
+            ...(dbUrl
+              ? { url: dbUrl }
+              : {
+                  host: config.get<string>('DB_HOST') || 'localhost',
+                  port: parseInt(config.get<string>('DB_PORT') || '3306', 10),
+                  username: config.get<string>('DB_USERNAME') || 'root',
+                  password: config.get<string>('DB_PASSWORD') || '',
+                  database: config.get<string>('DB_NAME') || 'sihati_db',
+                }),
+            ssl: isSsl ? { rejectUnauthorized: false } : false,
+            entities,
+            synchronize: true,
+            logging: false,
+          };
+        }
+
+        // Mode SQLite (Première préférence par défaut pour déploiement autonome zéro-dépendance)
+        const sqlitePath =
+          config.get<string>('SQLITE_PATH') ||
+          path.resolve(process.cwd(), 'data', 'sihati.sqlite');
+        const dir = path.dirname(sqlitePath);
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir, { recursive: true });
+        }
+
+        return {
+          type: 'sqlite',
+          database: sqlitePath,
+          entities,
+          synchronize: true,
+          logging: false,
+        };
+      },
     }),
     AuthModule,
     PatientsModule,

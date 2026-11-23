@@ -1,4 +1,4 @@
-import {
+﻿import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -63,7 +63,7 @@ export class DrugTraceability {
 
   @Column({
     name: 'current_stage',
-    type: 'enum',
+    type: 'simple-enum',
     enum: ['MANUFACTURER', 'WHOLESALER', 'PHARMACY', 'DISPENSED'],
     default: 'PHARMACY',
   })
@@ -73,7 +73,7 @@ export class DrugTraceability {
   currentLocation: string;
 
   @Column({
-    type: 'enum',
+    type: 'simple-enum',
     enum: ['CONFORME', 'UNDER_REVIEW', 'RECALLED'],
     default: 'CONFORME',
   })
@@ -85,7 +85,7 @@ export class DrugTraceability {
   @Column({ name: 'verification_hash', length: 64 })
   verificationHash: string;
 
-  @Column({ type: 'json', nullable: true })
+  @Column({ type: 'simple-json', nullable: true })
   timeline: Array<{
     step: string;
     location: string;

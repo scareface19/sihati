@@ -1,4 +1,4 @@
-import {
+﻿import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -52,7 +52,7 @@ export class Prescription {
   qrCodeHash: string;
 
   @Column({
-    type: 'enum',
+    type: 'simple-enum',
     enum: PrescriptionStatus,
     default: PrescriptionStatus.ACTIVE,
   })

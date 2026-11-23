@@ -17,18 +17,23 @@ services:
         value: 10000
       - key: JWT_SECRET
         generateValue: true
-      - key: DB_HOST
-        sync: false
-      - key: DB_PORT
-        value: "3306"
-      - key: DB_USERNAME
-        sync: false
-      - key: DB_PASSWORD
-        sync: false
-      - key: DB_NAME
-        value: sihati_db
-      - key: DB_SSL
-        value: "true"
+      - key: DB_TYPE
+        value: sqlite
+      - key: SQLITE_PATH
+        value: data/sihati.sqlite
+      # Configuration optionnelle si bascule vers MySQL Cloud :
+      # - key: DB_HOST
+      #   sync: false
+      # - key: DB_PORT
+      #   value: "3306"
+      # - key: DB_USERNAME
+      #   sync: false
+      # - key: DB_PASSWORD
+      #   sync: false
+      # - key: DB_NAME
+      #   value: sihati_db
+      # - key: DB_SSL
+      #   value: "true"
 
   # ============================================================================
   # 2. FRONTEND WEB (Next.js)

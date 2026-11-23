@@ -1,4 +1,4 @@
-import {
+﻿import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -41,7 +41,7 @@ export class AccessConsent {
   otpCode: string;
 
   @Column({
-    type: 'enum',
+    type: 'simple-enum',
     enum: ConsentStatus,
     default: ConsentStatus.PENDING,
   })

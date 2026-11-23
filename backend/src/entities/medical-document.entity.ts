@@ -1,4 +1,4 @@
-import {
+﻿import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
@@ -33,7 +33,7 @@ export class MedicalDocument {
 
   @Column({
     name: 'document_type',
-    type: 'enum',
+    type: 'simple-enum',
     enum: DocumentType,
     default: DocumentType.LAB_RESULT,
   })
@@ -50,7 +50,7 @@ export class MedicalDocument {
 
   @Column({
     name: 'uploaded_by',
-    type: 'enum',
+    type: 'simple-enum',
     enum: ['PATIENT', 'DOCTOR', 'LAB'],
     default: 'PATIENT',
   })
