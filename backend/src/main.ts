@@ -5,6 +5,14 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const logger = new Logger('SihatiBootstrap');
+
+  try {
+    const sq = require('sqlite3');
+    logger.log('Native sqlite3 module verified and loaded successfully.');
+  } catch (err: any) {
+    logger.error('Failed to require sqlite3:', err?.message || err);
+  }
+
   const app = await NestFactory.create(AppModule);
 
   // Activation CORS pour Next.js (Web) et Expo (Mobile)

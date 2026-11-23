@@ -114,9 +114,15 @@ import { SeedModule } from './modules/seed/seed.module';
           fs.mkdirSync(dir, { recursive: true });
         }
 
+        let sqliteDriver: any;
+        try {
+          sqliteDriver = require('sqlite3');
+        } catch (e) {}
+
         return {
           type: 'sqlite',
           database: sqlitePath,
+          ...(sqliteDriver ? { driver: sqliteDriver } : {}),
           entities,
           synchronize: true,
           logging: false,
