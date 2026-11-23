@@ -105,9 +105,8 @@ import { SeedModule } from './modules/seed/seed.module';
         }
 
         // Mode SQLite (Première préférence par défaut pour déploiement autonome zéro-dépendance)
-        const sqlitePath =
-          config.get<string>('SQLITE_PATH') ||
-          path.resolve(process.cwd(), 'data', 'sihati.sqlite');
+        const rawPath = config.get<string>('SQLITE_PATH') || 'data/sihati.sqlite';
+        const sqlitePath = path.isAbsolute(rawPath) ? rawPath : path.resolve(process.cwd(), rawPath);
         const dir = path.dirname(sqlitePath);
         if (!fs.existsSync(dir)) {
           fs.mkdirSync(dir, { recursive: true });
