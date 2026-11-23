@@ -709,6 +709,31 @@ function PatientRecordContent() {
       )}
 
       {/* ===================================================================== */}
+      {/* 0. NAVIGATION RETOUR À LA LISTE DES ÉTUDIANTS / PATIENTS            */}
+      {/* ===================================================================== */}
+      <div className="bg-emerald-900 text-white py-2.5 px-4 sm:px-6 lg:px-8 border-b border-emerald-800">
+        <div className="max-w-7xl mx-auto flex items-center justify-between text-xs">
+          <Link
+            href="/patients"
+            className="flex items-center gap-2 font-bold hover:text-emerald-200 transition bg-emerald-800/90 hover:bg-emerald-800 px-3 py-1.5 rounded-xl border border-emerald-700/60 shadow-xs"
+          >
+            <span>{dir === 'rtl' ? '← العودة إلى قائمة وسجل الطلبة' : '← Retour à la liste des étudiants & patients'}</span>
+          </Link>
+          <div className="flex items-center gap-3">
+            <span className="text-emerald-300 hidden sm:inline">
+              {dir === 'rtl' ? `أنت تستعرض حالياً الملف الطبي المفصل للطالب #${patientId}` : `Consultation du dossier médical individuel (Étudiant #${patientId})`}
+            </span>
+            <Link
+              href="/patients"
+              className="text-xs bg-white text-emerald-900 font-extrabold px-3 py-1 rounded-lg hover:bg-emerald-50 transition"
+            >
+              {dir === 'rtl' ? 'استعراض كل الطلبة' : 'Voir la liste complète'}
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* ===================================================================== */}
       {/* 1. TOP HEADER - IDENTITÉ DU PATIENT ÉPURÉE, AÉRÉE & ERGONOMIQUE      */}
       {/* ===================================================================== */}
       <header className="bg-white border-b border-slate-200/80 shadow-xs">

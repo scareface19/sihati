@@ -38,6 +38,13 @@ export class PatientsService {
     return patient;
   }
 
+  async getAllPatients() {
+    return this.patientRepo.find({
+      relations: ['user', 'emergencyContacts'],
+      order: { id: 'ASC' },
+    });
+  }
+
   async getPatientById(patientId: number) {
     const patient = await this.patientRepo.findOne({
       where: { id: patientId },

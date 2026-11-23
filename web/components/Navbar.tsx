@@ -77,7 +77,7 @@ export default function Navbar() {
                     <FileText className="w-3.5 h-3.5" />
                     <span>{t.nav.prescriptions}</span>
                   </Link>
-                  <Link href="/patients/1" className="hover:text-emerald-700 transition flex items-center gap-1.5">
+                  <Link href="/patients" className="hover:text-emerald-700 transition flex items-center gap-1.5">
                     <User className="w-3.5 h-3.5 text-slate-500" />
                     <span>{t.nav.patients}</span>
                   </Link>

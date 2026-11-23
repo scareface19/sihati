@@ -21,6 +21,12 @@ import { PatientsService } from './patients.service';
 export class PatientsController {
   constructor(private readonly patientsService: PatientsService) {}
 
+  @ApiOperation({ summary: 'Liste de tous les étudiants et patients' })
+  @Get()
+  getAllPatients() {
+    return this.patientsService.getAllPatients();
+  }
+
   @ApiOperation({ summary: 'Obtenir mon profil médical complet' })
   @Get('me')
   getMyProfile(@CurrentUser() user: any) {

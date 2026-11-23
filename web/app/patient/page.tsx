@@ -9,8 +9,12 @@ export default function PatientSingleRedirect() {
   const { user } = useAuth();
 
   useEffect(() => {
-    const targetId = user?.id || 1;
-    router.replace(`/patients/${targetId}`);
+    if (user?.role === 'PATIENT') {
+      const targetId = user?.id || 1;
+      router.replace(`/patients/${targetId}`);
+    } else {
+      router.replace('/patients');
+    }
   }, [router, user]);
 
   return (
