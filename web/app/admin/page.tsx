@@ -40,8 +40,8 @@ import {
   Building2,
   ShieldAlert,
 } from 'lucide-react';
-import PlatformSettingsManager from '@/components/admin/PlatformSettingsManager';
-import ControlledDrugsRegistry from '@/components/admin/ControlledDrugsRegistry';
+import PlatformSettingsManager from '../../components/admin/PlatformSettingsManager';
+import ControlledDrugsRegistry from '../../components/admin/ControlledDrugsRegistry';
 
 // Dictionnaire Trilingue Complet pour la Page d'Administration (Arabe, Français, Anglais)
 const adminI18n = {
