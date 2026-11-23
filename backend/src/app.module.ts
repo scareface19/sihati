@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as fs from 'fs';
 import * as path from 'path';
+import { AppController } from './app.controller';
 import {
   User,
   Patient,
@@ -41,6 +42,7 @@ import { SettingsModule } from './modules/settings/settings.module';
 import { SeedModule } from './modules/seed/seed.module';
 
 @Module({
+  controllers: [AppController],
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
