@@ -7,9 +7,17 @@ export const getApiBase = () => {
   if (typeof window !== 'undefined' && window.location.hostname) {
     const hostname = window.location.hostname;
     const protocol = window.location.protocol || 'http:';
+
+    // Détection cloud automatique sur Render
+    if (hostname.includes('onrender.com')) {
+      return 'https://sihati-backend-cv2q.onrender.com';
+    }
+
+    // Environnement local
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
       return `${protocol}//${hostname}:3005`;
     }
+
     return `${protocol}//${hostname}:3005`;
   }
   return 'http://localhost:3005';
