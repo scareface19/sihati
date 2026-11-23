@@ -1,0 +1,51 @@
+services:
+  # ============================================================================
+  # 1. API BACKEND (NestJS)
+  # ============================================================================
+  - type: web
+    name: sihati-backend
+    runtime: node
+    plan: free
+    region: frankfurt
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        value: sihati_db
+      - key: DB_SSL
+        value: "true"
+
+  # ============================================================================
+  # 2. FRONTEND WEB (Next.js)
+  # ============================================================================
+  - type: web
+    name: sihati-web
+    runtime: node
+    plan: free
+    region: frankfurt
+    rootDir: web
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: sihati-backend
+          property: host

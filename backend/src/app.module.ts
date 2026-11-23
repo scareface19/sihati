@@ -46,11 +46,22 @@ import { SeedModule } from './modules/seed/seed.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.DB_HOST || 'localhost',
-      port: parseInt(process.env.DB_PORT, 10) || 3306,
-      username: process.env.DB_USERNAME || 'root',
-      password: process.env.DB_PASSWORD || '',
-      database: process.env.DB_NAME || 'sihati_db',
+      ...(process.env.DATABASE_URL
+        ? { url: process.env.DATABASE_URL }
+        : {
+            host: process.env.DB_HOST || 'localhost',
+            port: parseInt(process.env.DB_PORT, 10) || 3306,
+            username: process.env.DB_USERNAME || 'root',
+            password: process.env.DB_PASSWORD || '',
+            database: process.env.DB_NAME || 'sihati_db',
+          }),
+      ssl:
+        process.env.DB_SSL === 'true' ||
+        (process.env.DATABASE_URL &&
+          !process.env.DATABASE_URL.includes('localhost') &&
+          !process.env.DATABASE_URL.includes('127.0.0.1'))
+          ? { rejectUnauthorized: false }
+          : false,
       entities: [
         User,
         Patient,
