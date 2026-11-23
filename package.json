@@ -1,0 +1,17 @@
+{
+  "name": "sihati-ecosystem",
+  "version": "1.0.0",
+  "description": "Plateforme et Application de Santé Numérique Algérienne - صحّتي (SIHATI)",
+  "scripts": {
+    "backend:install": "cd backend && npm install",
+    "backend:dev": "cd backend && npm run start:dev",
+    "backend:seed": "cd backend && npm run seed",
+    "web:install": "cd web && npm install",
+    "web:dev": "cd web && npm run dev",
+    "mobile:install": "cd mobile && npm install",
+    "mobile:start": "cd mobile && npx expo start"
+  },
+  "keywords": ["health", "startup", "algeria", "setif", "nestjs", "mysql", "nextjs", "expo"],
+  "author": "Balqis Issaoui & Khaoula Azzouzi",
+  "license": "UNLICENSED"
+}

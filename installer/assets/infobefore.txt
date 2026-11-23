@@ -1,0 +1,19 @@
+=======================================================================
+   SIHATI -- Plateforme Santé & Télémédecine Intelligente d'Algérie
+=======================================================================
+
+Bienvenue dans l'assistant d'installation officielle de la Plateforme SIHATI.
+
+Ce programme autonome va installer sur votre poste :
+  1. Le Serveur Backend & l'API REST NestJS (Port 3005)
+  2. L'Application Web & Portail Santé Next.js (Port 3000)
+  3. Le Serveur de Base de Données MySQL Portable (Port 3306)
+  4. L'initialisation automatique du schéma relationnel et des données de démo
+  5. Le Runtime Node.js autonome embarqué (Aucun prérequis externe)
+
+Préréquis :
+  - Windows 10 ou Windows 11 (64-bit)
+  - 2 Go d'espace disque disponible
+  - Aucun logiciel préalable n'est requis (Node.js et MySQL sont inclus)
+
+Cliquez sur "Suivant" pour continuer l'installation.

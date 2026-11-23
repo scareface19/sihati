@@ -1,0 +1,30 @@
+=======================================================================
+   SIHATI -- RAPPORT FINAL D'INSTALLATION
+=======================================================================
+
+L'installation de la plateforme SIHATI s'est terminée avec succès sur votre ordinateur.
+
+Dossier d'installation : {app}
+
+ACCÈS À L'APPLICATION :
+-----------------------------------------------------------------------
+  - Application Web (Interface Professionnelle) : http://localhost:3000
+  - API REST Backend                              : http://localhost:3005/api
+  - Documentation Swagger                         : http://localhost:3005/api/docs
+
+GESTION DES SERVICES :
+-----------------------------------------------------------------------
+  - Pour démarrer la plateforme : Utilisez le raccourci "SIHATI" sur le Bureau
+    ou exécutez "{app}\scripts\start-sihati.bat"
+  - Pour arrêter la plateforme  : Exécutez "{app}\scripts\stop-sihati.bat"
+  - Pour réinitialiser la BDD   : Exécutez "{app}\scripts\init-database.bat"
+
+COMPTES DE DÉMONSTRATION PAR DÉFAUT (Mot de passe: password123) :
+-----------------------------------------------------------------------
+  - Administrateur Général   : admin@sihati.dz
+  - Médecin Praticien        : doctor@sihati.dz
+  - Pharmacien d'Officine    : pharmacy@sihati.dz
+  - Patient Assuré (Chifa)   : patient@sihati.dz
+
+Période d'évaluation : Licence complète et illimitée active.
+=======================================================================
